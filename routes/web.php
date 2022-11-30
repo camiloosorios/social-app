@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
@@ -32,7 +33,14 @@ Route::get('/login', [LoginController::class, 'index']) -> name('login');
 Route::post('/login', [LoginController::class, 'store']) -> name('login');
 
 //Método GET, trae la vista del muro una vez el usuario se ha autenticado
-Route::get('/{user:username}', [PostController::class, 'index']) -> name('muro');
+Route::get('/{user:username}', [PostController::class, 'index']) -> name('posts.index');
+
+//Método GET, creación de posts
+Route::get('/posts/create', [PostController::class, 'create']) -> name('posts.create');
 
 //Método POST, cierra la sesión del usuario
 Route::post('/logout', [LogoutController::class, 'store']) -> name('logout');
+
+//Método POST, para cargar imagen a dropzone
+Route::post('/imagenes', [ImagenController::class, 'store']) -> name('imagenes.store');
+

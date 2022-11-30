@@ -25,6 +25,6 @@ class LoginController extends Controller
 
         }
 
-        return redirect() -> route('muro');
+        return redirect() -> route('posts.index', [auth() -> user() -> username]);
     }
 }
