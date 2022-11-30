@@ -15,9 +15,19 @@
 
                 <h1 class="text-3xl font-black">SocialAPP</h1>
                 <nav class="flex gap-2 items-center">
+                    @auth
+                        <a href="/muro" class="font-bold text-gray-600 text-sm mx-5">Hola <span class="font-normal">{{ auth() -> user() -> username }}</span></a>
+                        <form action="{{ route('logout') }}" method="POST">
 
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm">Login</a>
-                    <a href="/crear-cuenta" class="font-bold uppercase text-gray-600 text-sm">Crear Cuenta</a>
+                            @csrf
+                            <button type="submit" class="font-bold uppercase text-gray-600 text-sm">CERRAR SESIÓN</button/>
+                        </form>
+                    @endauth
+                    @guest
+                    
+                        <a href="/login" class="font-bold uppercase text-gray-600 text-sm mx-5">Login</a>
+                        <a href="{{ route('register') }}" class="font-bold uppercase text-gray-600 text-sm">Crear Cuenta</a>
+                    @endguest
                 </nav>
             </div>
         </header>
