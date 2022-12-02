@@ -21,4 +21,9 @@ class Post extends Model
         //Relación Posts belongs to Users
         return $this -> belongsTo(User::class)->select(['name', 'username']);
     }
+
+    public function comentario()
+    {
+        return $this -> hasMany(Comentario::class);
+    }
 }

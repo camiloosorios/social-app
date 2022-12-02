@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -41,7 +42,11 @@ Route::get('/posts/create', [PostController::class, 'create']) -> name('posts.cr
 //Método POST, para guardar publicaciones en DB
 Route::post('/posts', [PostController::class, 'store']) -> name('posts.store');
 
+//Método GET, para cargar vista de imagen publicada
 Route::get('/{user:username}/posts/{post}', [PostController::class, 'show']) -> name('posts.show');
+
+//Método POST, para guardar los comentarios en base de datos
+Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'store']) -> name('comentarios.store');
 
 //Método POST, cierra la sesión del usuario
 Route::post('/logout', [LogoutController::class, 'store']) -> name('logout');

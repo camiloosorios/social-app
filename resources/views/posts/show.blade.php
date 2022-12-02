@@ -6,7 +6,7 @@
 
 @section('contenido')
 
-    <div class="container mx-auto flex">
+    <div class="container mx-auto md:flex">
 
         <div class="md:w-1/2">
 
@@ -24,7 +24,14 @@
             @auth
             <div class="shadow bg-white p-5 mb-5">
                 <p class="text-xl font-bold text-center mb-4">Comentarios</p>
-                <form action="" method="POST">
+
+                @if (session('mensaje'))
+                    <div class="bg-green-500 p-2 rounded-lg mb-6 text-white text-center uppercase font-bold">
+                        {{ session('mensaje') }}
+                    </div>                    
+                @endif
+
+                <form action="{{ route('comentarios.store', ['post' => $post, 'user' => $user]) }}" method="POST">
                     @csrf
                     <div class="mb-5">
 
@@ -40,8 +47,24 @@
                     </div>
                     <input type="submit" value="Comentar" class="bg-sky-600 hover bg-sky-700 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
                 </form>
+                @endauth
+
+                <div class="bg-white shadow mb-5 max-h-96 overflow-y-scroll">
+                    @if ($post ->comentario->count())
+                        @foreach ($post->comentario as $comentario)
+                            <div class="p-5 border-gray-300 border-b">
+                                <a href="{{ route('posts.index', $comentario -> user) }}" class="font-bold">
+                                    {{ $comentario -> user -> username }}
+                                </a>
+                                <p>{{ $comentario -> comentario }}</p>
+                                <p class="text-sm text-gray-500">{{ $comentario -> created_at -> diffForHumans() }}</p>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="p-10 text-center mt-10"> No hay comentarios aún</p>
+                    @endif
+                </div>
             </div>                
-            @endauth
         </div>
     </div>
 
