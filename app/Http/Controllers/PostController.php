@@ -12,7 +12,7 @@ class PostController extends Controller
     public function __construct()
     {
         //Se ejecuta el middleware de autenticación
-        $this -> middleware('auth');
+        $this -> middleware('auth') -> except(['show', 'index']);
     }
 
     public function index(User $user)
@@ -63,5 +63,14 @@ class PostController extends Controller
 
         return redirect() -> route('posts.index', auth() -> user() -> username);
 
+    }
+
+    public function show(User $user, Post $post)
+    {
+        //Se pasan los parametros user y post para ser utilizados en la vista
+        return view('posts.show', [
+            'user' => $user,
+            'post' => $post
+        ]);
     }
 }

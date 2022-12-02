@@ -41,6 +41,8 @@ Route::get('/posts/create', [PostController::class, 'create']) -> name('posts.cr
 //Método POST, para guardar publicaciones en DB
 Route::post('/posts', [PostController::class, 'store']) -> name('posts.store');
 
+Route::get('/{user:username}/posts/{post}', [PostController::class, 'show']) -> name('posts.show');
+
 //Método POST, cierra la sesión del usuario
 Route::post('/logout', [LogoutController::class, 'store']) -> name('logout');
 
