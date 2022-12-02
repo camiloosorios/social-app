@@ -15,4 +15,10 @@ class Post extends Model
         'imagen',
         'user_id'
     ];
+
+    public function user()
+    {
+        //Relación Posts belongs to Users
+        return $this -> belongsTo(User::class)->select(['name', 'username']);
+    }
 }
