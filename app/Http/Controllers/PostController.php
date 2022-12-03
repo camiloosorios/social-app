@@ -73,4 +73,11 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
+    
+    public function destroy(Post $post)
+    {
+        if($post -> user_id == auth() -> user() -> id){
+            
+        }
+    }
 }

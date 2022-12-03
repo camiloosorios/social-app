@@ -51,6 +51,9 @@ Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'stor
 //Método POST, cierra la sesión del usuario
 Route::post('/logout', [LogoutController::class, 'store']) -> name('logout');
 
+//Método DELETE, borrar una publicación
+Route::delete('/posts/{post}', [PostController::class, 'destroy']) -> name('posts.destroy');
+
 //Método POST, para cargar imagen a dropzone
 Route::post('/imagenes', [ImagenController::class, 'store']) -> name('imagenes.store');
 
