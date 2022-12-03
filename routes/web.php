@@ -26,7 +26,7 @@ Route::get('/', function () {
 //Método GET, trae la vista de Registro de usuario
 Route::get('/register', [RegisterController::class, 'index']) -> name('register');
 //Método POST, envia el formulario y realiza el registro en BD
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store']) -> name('register');
 
 //Método GET, trae la vista del login de usuario
 Route::get('/login', [LoginController::class, 'index']) -> name('login');

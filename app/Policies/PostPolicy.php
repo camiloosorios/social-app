@@ -19,7 +19,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        //Validar que el usuario que solicita eliminar es el mismo que creo el post ---- retorna true o false ---
+        return $user -> id == $post -> user_id;
     }
 
 }

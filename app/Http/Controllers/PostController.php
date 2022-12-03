@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -76,8 +77,23 @@ class PostController extends Controller
     
     public function destroy(Post $post)
     {
-        if($post -> user_id == auth() -> user() -> id){
-            
+        // Consulta el policy para verificar si esta autorizado para eliminar el registro --- Retorna true o false ---
+        $this -> authorize('delete', $post);
+        
+        //Si la validacion pasa borramos la publicacion
+        $post -> delete();
+
+        //Eliminar publicación
+        $imagen_path = public_path('uploads/' . $post -> imagen); //Se toma el path de la imagen
+
+        //Se ejecuta Fasade File para verificar si existe la imagen
+        if(File::exists($imagen_path)){ 
+            //Elimina la imagen de la carpeta uploads
+            unlink($imagen_path); 
         }
+
+        //Redireccionamos al muro
+        return redirect() -> route('posts.index', auth() -> user() -> username);
+
     }
 }
