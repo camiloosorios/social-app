@@ -38,7 +38,8 @@ class PerfilController extends Controller
         ]);
         
         //Validamos la contraseña ingresada
-        if(!auth() -> attempt($request -> only('password'))) {
+        if(!auth() -> attempt(['email' => auth()->user()->email, 'password' => $request -> password])) {
+            // if(!auth() -> attempt($request -> only('email','password'))) {
 
             //En caso de error en las credenciales devuelve un mensaje
             return back() -> with('mensaje', 'Contraseña incorrecta');
