@@ -46,7 +46,13 @@ class User extends Authenticatable
     //Relaciones entre tablas
     public function posts()
     {
-        //Relación Users hasmany Posts
+        //Relación Users has many Posts
         return $this -> hasMany(Post::class);
+    }
+
+    public function likes()
+    {
+        //Relación Users has many Likes
+        return $this -> hasMany(Like::class);
     }
 }
