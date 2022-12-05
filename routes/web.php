@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,13 @@ Route::post('/posts/{post}/likes', [LikeController::class, 'store']) -> name('po
 
 //Quitar Like a las fotos
 Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy']) -> name('posts.likes.destroy');
+
+//Seguir usuarios
+Route::post('/{user:username}/follow', [FollowerController::class, 'store']) -> name('users.follow');
+
+//Dejar de seguir usuarios
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy']) -> name('users.unfollow');
+
 
 
 

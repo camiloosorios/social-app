@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 
 class PerfilController extends Controller
@@ -28,11 +29,23 @@ class PerfilController extends Controller
         $request -> request -> add(['username' => Str::slug($request-> username)]);
 
         $this -> validate($request, [
-
-            'username' => ['required','unique:users,username,'.auth()->user()->id,'min:3','max:20','not_in:editar-perfil,twitter']
-
+            
+            'username' => ['required','unique:users,username,'.auth()->user()->id,'min:3','max:20','not_in:editar-perfil,twitter'],
+            'email' => ['required','unique:users,email,'.auth()->user()->id,'max:40'],
+            'password' => 'required|min:6',
+            'password2' => 'nullable|min:6'
+            
         ]);
+        
+        //Validamos la contraseña ingresada
+        if(!auth() -> attempt($request -> only('password'))) {
 
+            //En caso de error en las credenciales devuelve un mensaje
+            return back() -> with('mensaje', 'Contraseña incorrecta');
+
+        }
+
+        //Preparación de imagen
         if($request -> imagen){
 
             //Almacena en una variable la imagen
@@ -54,12 +67,20 @@ class PerfilController extends Controller
 
         }
 
-        //Guardar cambios
         $usuario = User::find(auth()->user()->id); //Busca el usuario en base de datos
 
-        $usuario -> username = $request -> username; //Se actualiza el nombre de usuario
-        $usuario -> imagen = $nombreImagen ?? ''; //Se actualiza la imagen
+        //Validar que viene contraseña nueva
+        if($request -> password2){
 
+            $usuario -> password = Hash::make($request -> password2); // Se actualiza el password
+
+        }
+
+        $usuario -> username = $request -> username; //Se actualiza el nombre de usuario
+        $usuario -> imagen = $nombreImagen ?? auth()-> user() -> imagen ?? ''; //Se actualiza la imagen
+        $usuario -> email = $request -> email ?? auth() -> user() -> email; //Se actualiza el email
+        
+        //Actualizamos la información
         $usuario -> save();
 
         //Redireccionar al muro
