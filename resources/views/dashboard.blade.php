@@ -36,6 +36,24 @@
                     <p class="text-gray-800 text-sm mt-2 font-bold">
                         {{ $user -> posts -> count() }}<span class="font-normal ml-2">Posts</span>
                     </p>
+                    @auth
+                        <form action="">
+                            @csrf
+                            <input  type="submit" 
+                                    name="" 
+                                    id="" 
+                                    class="bg-blue-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
+                                    value="Seguir">
+                        </form>
+                        <form action="">
+                            @csrf
+                            <input  type="submit" 
+                                    name="" 
+                                    id="" 
+                                    class="bg-red-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
+                                    value="Dejar de seguir">
+                        </form>
+                    @endauth
                 </div>
             </div>
         </div>
