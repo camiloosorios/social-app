@@ -28,31 +28,37 @@
                         @endauth
                     </div>
                     <p class="text-gray-800 text-sm mt-3 font-bold">
-                        0<span class="font-normal ml-2">Seguidores</span>
+                        {{ $user->followers()->count() }}<span class="font-normal ml-2"> @choice('Seguidor|Seguidores', $user->followers()->count())</span>
                     </p>
                     <p class="text-gray-800 text-sm mt-2 font-bold">
-                        0<span class="font-normal ml-2">Siguiendo</span>
+                        {{ $user->followings()->count() }}<span class="font-normal ml-2"><span class="font-normal ml-2">Siguiendo</span>
                     </p>
                     <p class="text-gray-800 text-sm mt-2 font-bold">
-                        {{ $user -> posts -> count() }}<span class="font-normal ml-2">Posts</span>
+                        {{ $user -> posts -> count() }}<span class="font-normal ml-2">@choice('Post|Posts', $user->posts->count())</span>
                     </p>
                     @auth
-                        <form action="">
-                            @csrf
-                            <input  type="submit" 
-                                    name="" 
-                                    id="" 
-                                    class="bg-blue-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
-                                    value="Seguir">
-                        </form>
-                        <form action="">
-                            @csrf
-                            <input  type="submit" 
-                                    name="" 
-                                    id="" 
-                                    class="bg-red-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
-                                    value="Dejar de seguir">
-                        </form>
+                    @if ($user -> id !== auth()->user()->id) 
+                        @if (!$user->siguiendo(auth()->user()))   
+                            <form action="{{ route('users.follow', $user) }}" method="POST">
+                                @csrf
+                                <input  type="submit" 
+                                        name="" 
+                                        id="" 
+                                        class="bg-blue-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
+                                        value="Seguir">
+                            </form>
+                        @else
+                            <form action="{{ route('users.unfollow', $user) }}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <input  type="submit" 
+                                        name="" 
+                                        id="" 
+                                        class="bg-red-600 text-white uppercase rounded-lg px-3 pyu-1 text-xs font-bold cursor-pointer"
+                                        value="Dejar de seguir">
+                            </form>                            
+                        @endif                       
+                    @endif
                     @endauth
                 </div>
             </div>
