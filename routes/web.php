@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
@@ -22,9 +23,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
-});
+Route::get('/', HomeController::class) -> name('home');
 
 //Método GET, trae la vista de Registro de usuario
 Route::get('/register', [RegisterController::class, 'index']) -> name('register');

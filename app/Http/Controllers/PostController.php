@@ -21,7 +21,7 @@ class PostController extends Controller
 
         //Realizar consulta a la DB para traer las publicaciones del usuario logeado
         // $posts = Post::where('user_id', $user -> id) -> get(); Get trae los datos de la consulta realizada
-        $posts = Post::where('user_id', $user -> id) -> paginate('20'); //paginate realiza la paginación de la consulta realizada
+        $posts = Post::where('user_id', $user -> id) ->latest() -> paginate('20'); //paginate realiza la paginación de la consulta realizada
 
         //Devuelve la vista del muro
         return view('dashboard', [
@@ -43,16 +43,6 @@ class PostController extends Controller
             'descripcion' => 'required',
             'imagen' => 'required'
         ]);
-
-        //Opción 1 creando post sin relacion
-        // Post::create([
-
-        //     'titulo' => $request -> titulo,
-        //     'descripcion' => $request -> descripcion,
-        //     'imagen' => $request -> imagen,
-        //     'user_id' => auth() -> user() -> id
-
-        // ]);
 
         //Opción 2 creando post con la relación
         $request -> user() -> posts() -> create([

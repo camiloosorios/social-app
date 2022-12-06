@@ -8,6 +8,7 @@
         <title>SocialAPP - @yield('titulo')</title>
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
+        @livewireStyles
     </head>
     <body class="bg-gray-200">
 
@@ -15,7 +16,7 @@
 
             <div class="container mx-auto flex justify-between items-center"> 
 
-                <h1 class="text-3xl font-black">SocialAPP</h1>
+                <a href="{{ route('home') }}" class="text-3xl font-black">SocialAPP</a>
                 <nav class="flex gap-2 items-center">
                     @auth
 
@@ -50,5 +51,6 @@
 
             SocialAPP - Todos los derechos reservados {{ now() -> year }}
         </footer>
+        @livewireScripts
     </body>
 </html>
