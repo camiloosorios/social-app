@@ -1,1 +1,4 @@
-web: cp .env.example .env && php artisan key:generate && heroku-php-apache2
+web: npm run start
+
+# Will be run after the build phase
+release: npm run migrate:deploy
