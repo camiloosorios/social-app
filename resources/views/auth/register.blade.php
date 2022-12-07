@@ -23,7 +23,7 @@
                     <input  type="text" 
                             id="name" 
                             name="name" 
-                            placeholder="Tu nombre" 
+                            placeholder="Ingresa tu nombre" 
                             class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror" 
                             value="{{ old('name') }}">
                     @error('name')
@@ -32,11 +32,11 @@
                 </div>
                 <div class="mb-5">
 
-                    <label for="username" class="mb-2 block uppercase text-gray-500 font-bold">Username</label>
+                    <label for="username" class="mb-2 block uppercase text-gray-500 font-bold">Nombre de usuario</label>
                     <input  type="text" 
                             id="username" 
                             name="username" 
-                            placeholder="Tu nombre de usuario"
+                            placeholder="Ingresa tu nombre de usuario"
                             class="border p-3 w-full rounded-lg @error('username') border-red-500 @enderror"
                             value="{{ old('username') }}">
                     @error('username')
@@ -45,11 +45,11 @@
                 </div>
                 <div class="mb-5">
 
-                    <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">Email</label>
+                    <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">Correo</label>
                     <input  type="email" 
                             id="email" 
                             name="email" 
-                            placeholder="Tu Email de Registro"
+                            placeholder="Ingresa tu Correo Electrónico"
                             class="border p-3 w-full rounded-lg @error('email') border-red-500 @enderror"
                             value="{{ old('email') }}">
                     @error('email')
@@ -58,11 +58,11 @@
                 </div>
                 <div class="mb-5">
 
-                    <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">Password</label>
+                    <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">Contraeña</label>
                     <input  type="password" 
                             id="password" 
                             name="password" 
-                            placeholder="Password de Registro"
+                            placeholder="Ingresa tu Contraseña"
                             class="border p-3 w-full rounded-lg @error('password') border-red-500 @enderror">
                     @error('password')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
@@ -70,11 +70,11 @@
                 </div>
                 <div class="mb-5">
 
-                    <label for="password_confirmation" class="mb-2 block uppercase text-gray-500 font-bold">Repetir Password</label>
+                    <label for="password_confirmation" class="mb-2 block uppercase text-gray-500 font-bold">Repetir Contraeña</label>
                     <input  type="password" 
                             id="password_confirmation" 
                             name="password_confirmation" 
-                            placeholder="Repite tu Password"
+                            placeholder="Repite tu Contraseña"
                             class="border p-3 w-full rounded-lg">
                 </div>
                 <input type="submit" value="Crear Cuenta" class="bg-sky-600 hover bg-sky-700 transition-colors cursor-pointer upercase font-bold w-full p-3 text-white rounded-lg">

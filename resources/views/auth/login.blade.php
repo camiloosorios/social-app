@@ -23,11 +23,11 @@
                 @endif
                 <div class="mb-5">
 
-                    <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">Email</label>
+                    <label for="email" class="mb-2 block uppercase text-gray-500 font-bold">Correo</label>
                     <input  type="email" 
                             id="email" 
                             name="email" 
-                            placeholder="Tu Email de Registro"
+                            placeholder="Ingresa tu Correo Electrónico"
                             class="border p-3 w-full rounded-lg @error('email') border-red-500 @enderror"
                             value="{{ old('email') }}">
                     @error('email')
@@ -36,11 +36,11 @@
                 </div>
                 <div class="mb-5">
 
-                    <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">Password</label>
+                    <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">Contraseña</label>
                     <input  type="password" 
                             id="password" 
                             name="password" 
-                            placeholder="Password de Registro"
+                            placeholder="Ingresa tu contraseña"
                             class="border p-3 w-full rounded-lg @error('password') border-red-500 @enderror">
                     @error('password')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
